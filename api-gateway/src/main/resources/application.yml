@@ -1,0 +1,43 @@
+server:
+  port: 2000
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: userCmd-RegisterUser
+          uri: http://localhost:8081/api/registerUser
+          predicates:
+            - Path=/api/registerUser
+        - id: userCmd-UpdateUser
+          uri: http://localhost:8081/api/updateUser/**
+          predicates:
+            - Path=/api/updateUser/**
+        - id: userQuery
+          uri: http://localhost:8082/api/userLookup/**
+          predicates:
+            - Path=/api/userLookup/**
+        - id: productCmd-CreateProduct
+          uri: http://localhost:9091/api/createProduct
+          predicates:
+            - Path=/api/createProduct
+        - id: productCmd-UpdatePrice
+          uri: http://localhost:9091/api/updatePrice/**
+          predicates:
+            - Path=/api/updatePrice/**
+        - id: productCmd-UpdateStock
+          uri: http://localhost:9091/api/updateStock/**
+          predicates:
+            - Path=/api/updateStock/**
+        - id: basketCmd-AddProductToBasket
+          uri: http://localhost:7071/api/basketProduct
+          predicates:
+            - Path=/api/basketProduct
+        - id: basketCmd-RemoveProductFromBasket
+          uri: http://localhost:7071/api/removeBasketProduct/**
+          predicates:
+            - Path=/api/removeBasketProduct/**
+        - id: basketQuery
+          uri: http://localhost:7072/api/basketProductLookup/**
+          predicates:
+            - Path=/api/basketProductLookup/**
