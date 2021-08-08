@@ -11,22 +11,22 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Document(collection = "users")
-public class User {
+public class User implements Serializable {
     @Id
     private String id;
-
-    @NotEmpty
-    private String name;
-
-    @Email(message = "Please provide a valid email address!")
+    @NotEmpty(message = "firstname is mandatory")
+    private String firstname;
+    @NotEmpty(message = "lastname is mandatory")
+    private String lastname;
+    @Email(message = "please provide a valid email address")
     private String emailAddress;
+    private String basketId;
 
-    @NotNull
-    private Long basketId;
 }

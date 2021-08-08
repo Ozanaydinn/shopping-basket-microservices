@@ -13,9 +13,6 @@ import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
 @Aggregate
@@ -24,10 +21,14 @@ public class UserAggregate {
     private String id;
     private User user;
 
+
     @CommandHandler
     public UserAggregate(RegisterUserCommand command) {
         var newUser = command.getUser();
         newUser.setId(command.getId());
+
+        var basketId = UUID.randomUUID().toString();
+        newUser.setBasketId(basketId);
 
         var event = UserRegisteredEvent.builder()
                 .id(command.getId())
@@ -40,6 +41,7 @@ public class UserAggregate {
     @CommandHandler
     public void handle(UpdateUserCommand command) {
         var updatedUser = command.getUser();
+        updatedUser.setId(command.getId());
 
         var event = UserUpdatedEvent.builder()
                 .id(UUID.randomUUID().toString())
@@ -61,9 +63,6 @@ public class UserAggregate {
     public void on(UserRegisteredEvent event) {
         this.id = event.getId();
         this.user = event.getUser();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
-        Date date = new Date();
-        System.out.println(dateFormat.format(date));
     }
 
     @EventSourcingHandler
