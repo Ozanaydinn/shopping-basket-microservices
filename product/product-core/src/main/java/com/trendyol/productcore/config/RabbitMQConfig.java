@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
     @Bean
     Queue productBasketCommandQueue() {
-        return new Queue("productBasketCommandQueue", false);
+        return new Queue("productBasketCommandQueue", true);
     }
 
     @Bean
     Queue productBasketQueryQueue() {
-        return new Queue("productBasketQueryQueue", false);
+        return new Queue("productBasketQueryQueue", true);
     }
 
     @Bean

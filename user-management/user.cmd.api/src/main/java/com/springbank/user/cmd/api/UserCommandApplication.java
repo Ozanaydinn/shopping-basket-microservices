@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import({ AxonConfig.class, RabbitMQConfig.class})
+@Import({ AxonConfig.class})
 public class UserCommandApplication {
 
 	public static void main(String[] args) {

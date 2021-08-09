@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQProducerConfig {
     @Bean
     Queue userNotificationCommandQueue() {
-        return new Queue("userNotificationCommandQueue", false);
+        return new Queue("userNotificationCommandQueue", true);
     }
 
     @Bean
     Queue userNotificationQueryQueue() {
-        return new Queue("userNotificationQueryQueue", false);
+        return new Queue("userNotificationQueryQueue", true);
     }
 
     @Bean
